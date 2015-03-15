@@ -28,6 +28,7 @@ function makeAllTablesSortable(tables) {
         var oThead = tables[i].getElementsByTagName('thead');
 
         // 有thead则根据thead排序，没有则根据tbody进行排序
+        //评注：这种考虑有一定可行性，因为挺多网站上的表格是不正规的，应该用th的地方还是写成tr
         if (oThead.length == 0) oThead = tables[i].getElementsByTagName("tbody");
         for (var j = 0; j < oThead.length; j++) {  // 则对thead进行遍历
             shortedth[i][j] = 0;
@@ -100,7 +101,7 @@ function toShort(event) {
         this.className = "up";
         shortedth[this.i][this.j] = this.k + 1;
     }
-}
+}//评注：这一个函数稍微有点长，把改变样式和改变顺序拆分开来也许会更加结构化些
 
 function getcmp(k) { // 比较函数
     return function cmp(tr1, tr2) {
@@ -119,3 +120,4 @@ function getcmp(k) { // 比较函数
 
 /*var tables = getAllTables();
 makeAllTablesSortable(tables);*/
+//总评：代码的健壮性不错，考虑了不同表格形式的兼容，代码的结构化较好
